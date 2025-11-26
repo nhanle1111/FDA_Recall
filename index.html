@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.10/lib/p5.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.10/lib/addons/p5.sound.min.js"></script>
+    
+     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>  
+    
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      html, body {margin: 0;height: 100%;}
+      .container{display: flex;height:100vh;}
+      .map-wrap {position: relative;flex: 1 1 auto; min-width: 0;}
+      #mapid {position: absolute; inset: 0;}
+      .sidebar{
+                  width: 360px;
+                  max-width: 100%;
+                  background: #ffffff;
+                  border-left: 1px solid #e5e7eb;
+                  display: flex;
+                  flex-direction: column;
+                  overflow:hidden;}
+      .sidebar-head {
+                  position: sticky;
+                  top: 0;                     
+                  background: #ffffff;
+                  padding: 4px 16px;
+                  border-bottom: 1px solid #e5e7eb;}
+      .section{padding: 8px 16px;}
+      .searchpanel{display:grid; gap: 8px;}
+      .searchpanel input {
+                border: 1px solid #d1d5db;
+                border-radius: 10px;
+                padding: 10px;
+                font-size: 14px;
+                width: 95%;
+                font-family: Verdana;}
+      .searchpanel select {
+                height: 26px;
+                width: 80px;
+                border: 1px solid #d1d5db;
+                border-radius: 8px;
+                padding: 0 10px;}
+      .searchpanel button{
+                border-radius: 10px;
+                font-size: 16px;
+                padding: 12px;
+                cursor: pointer;
+                background: #386cb0;
+                color: white;}
+      .legend { 
+                background:#fff;
+                border:1px solid #e5e7eb;
+                padding:16px 20px;
+                font-family:Verdana;}  
+    .legend-row {
+                display:flex;
+                align-items:center;
+                gap:10px;
+                margin:6px 0;
+                font-size:20px;
+                color:#374151;}
+    .legend-circle {
+                width:20px;
+                height:20px;
+                border-radius:50%;
+      border:1px solid rgba(0,0,0,0.25);}
+      .disclaim{
+                display:grid;
+                align-items:center;
+                gap:5px;
+                padding:16px 20px;
+                font-size:12px;
+                font-family:verdana;}
+      
+   
+    </style>
+</head>
+  
+<body>
+  <div class="container">
+    <div class="map-wrap">
+      <div id="mapid"></div>
+    </div>
+
+    
+  <aside class="sidebar">
+  <header class="sidebar-head">
+  <h1 style="font-family:Verdana">Drug Recalls</h1>
+  </header>
+
+  <section class="section">
+     <div class="searchpanel">
+    <input id="brandInput" type="text" placeholder="Enter brand (e.g., Tylenol, Mylan)"> 
+    <div>
+    <label style ="font-size:12px;font-family:verdana;color:#555"> Year: </label>
+    <select id="yearStart"></select>
+    <span>-</span>
+    <select id="yearEnd"></select>
+    </div>
+    <button id="submit" style="font-family:verdana"> Search Recalls </button>
+    </div>
+  </section>
+
+  <section class="legendsection">
+    <div class="legend">
+    <h3 style="margin:0 0 8px 0;font-size:24px; font-family:verdana;">Recall Class</h3>
+
+    <div class="legend-row">
+      <span class="legend-circle" style="background:#fef0d9;"></span>
+      <span>Class I</span>
+    </div>
+
+    <div class="legend-row">
+      <span class="legend-circle" style="background:#fdcc8a;"></span>
+      <span>Class II</span>
+    </div>
+
+    <div class="legend-row">
+      <span class="legend-circle" style="background:#fc8d59;"></span>
+      <span>Class III</span>
+    </div>
+  </div>
+  </section>
+
+  <section class="disclaimsection">
+    <div class="disclaim">
+      <h3 style="margin:0 0 1px 0;font-size:12px; font-family:verdana;">Data</h3>
+      <span>OpenFDA - Drug Enforcement Report</span>
+      <h3 style="margin:0 0 1px 0;font-size:12px; font-family:verdana;">Basemap</h3>
+      <span>OpenStreetMap contributors</span>
+    </div>
+  </section>
+</aside>
+  </div>
+    <script src="sketch.js"></script>
+  
+</body>
+</html>
